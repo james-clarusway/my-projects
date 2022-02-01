@@ -1,6 +1,15 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-  This project has been created as a static web site.
+  This CloudFormation Template was written for 
+  running Kittens Carousel Static Website on EC2. 
+  Kittens Carousel Static Website will be 
+  deployed on Amazon Linux 2 
+  (ami-0a8b4cd432b1c3063) EC2 Instance with 
+  custom security group which allows http 
+  connections on port 80 and ssh port 22 from 
+  anywhere. Kittens Carousel Static Website 
+  is downloaded from my Public Github repository,
+  then deployed on Apache Web Server.
 Resources:
   myec2:
     Type: AWS::EC2::Instance
@@ -15,27 +24,35 @@ Resources:
             #! /bin/bash
             yum update -y
             yum install httpd -y
-            systemctl start httpd
-            systemctl enable httpd
+            chmod -R 777 /var/www/html
+            FOLDER="https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web"
             cd /var/www/html
-            wget https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web/index.html
-            wget https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web/cat0.jpg
-            wget https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web/cat1.jpg
-            wget https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web/cat2.jpg
-            wget https://raw.githubusercontent.com/MelekAlan/my-projects/main/aws/Project-101-kittens-carousel-static-website-ec2/static-web/cat3.png
-
-
+            wget $FOLDER/index.html
+            wget $FOLDER/cat0.jpg
+            wget $FOLDER/cat1.jpg
+            wget $FOLDER/cat2.jpg
+            wget $FOLDER/cat3.png
+            systemctl start httpd
+            systemctl enable 
+            
   mysecgroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "enables ssh and http" 
+      GroupDescription: "Enable HTTP for Apache Web Server and SSH for secure connection." 
       SecurityGroupIngress:
         - CidrIp: "0.0.0.0/0"
           FromPort: 22
-          IpProtocol: "tcp"
+          IpProtocol: tcp
           ToPort: 22
         
         - CidrIp: "0.0.0.0/0"
           FromPort: 80
-          IpProtocol: "tcp"
+          IpProtocol: tcp
           ToPort: 80
+
+Outputs:
+  WebsiteURL:
+    Value: !Sub
+      - http://${PublicAddress}
+      - PublicAddress: !GetAtt myec2.PublicDnsName
+    Description: Kittens Carousel Application URL
