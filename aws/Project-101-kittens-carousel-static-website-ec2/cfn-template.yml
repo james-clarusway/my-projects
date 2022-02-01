@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 Description: |
-  This website
+  This project has been created as a static web site.
 Resources:
   myec2:
     Type: AWS::EC2::Instance
@@ -28,7 +28,7 @@ Resources:
   mysecgroup:
     Type: AWS::EC2::SecurityGroup
     Properties:
-      GroupDescription: "enables ssh and http" # Required
+      GroupDescription: "enables ssh and http" 
       SecurityGroupIngress:
         - CidrIp: "0.0.0.0/0"
           FromPort: 22
@@ -39,5 +39,3 @@ Resources:
           FromPort: 80
           IpProtocol: "tcp"
           ToPort: 80
-
-
