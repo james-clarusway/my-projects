@@ -33,7 +33,7 @@ Resources:
             wget $FOLDER/cat2.jpg
             wget $FOLDER/cat3.png
             systemctl start httpd
-            systemctl enable 
+            systemctl enable httpd
             
   mysecgroup:
     Type: AWS::EC2::SecurityGroup
