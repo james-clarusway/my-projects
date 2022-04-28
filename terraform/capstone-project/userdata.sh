@@ -4,7 +4,7 @@ apt-get update -y
 apt-get install git -y
 apt-get install python3 -y
 cd /home/ubuntu/
-TOKEN="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"   #  PLEASE ENTER YOUR TOKEN
+TOKEN='XXXXXXXXXXXXXXXXXXXXXXXX"   #  PLEASE ENTER YOUR TOKEN
 git clone https://$TOKEN@github.com/MelekAlan/capstone-tf.git 
 cd /home/ubuntu/capstone-tf
 apt install python3-pip -y
