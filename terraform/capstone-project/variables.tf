@@ -60,7 +60,7 @@ data "aws_ami" "tf-ami" {
 }
 
 variable "db-password" {
-  default = "Clarusway1234"    # PLEASE ENTER YOUR DATABASE PASSWORD
+  default = "XXXXXXXXXX"    # PLEASE ENTER YOUR DATABASE PASSWORD
 }
 
 variable "ubuntu-ami" {

@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 provider "github" {
-  token = "XXXXXXXXXXXXXXXXXXXXXX"  #Please enter your github token
+  token = "XXXXXXXXXXXXXXXXXXXXXX"  #  PLEASE ENTER YOUR GITHUB TOKEN
 }
 
 
